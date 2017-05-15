@@ -1,63 +1,75 @@
-import psycopg2
 import display
+import os
+import psycopg2
+import query_functions
+import sys
 from data_manager import access_db
 
 
-@access_db
-def mentor_full_names():
-    query_command = "SELECT first_name, last_name FROM mentors;"
-    return query_command
+def choose():
+    inputs = display.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        os.system('clear')
+        table = query_functions.mentor_full_names()
+        title_list = ['First name', 'Last name']
+        display.print_table(table, title_list)
+    elif option == "2":
+        os.system('clear')
+        table = query_functions.mentor_nick_names_miskolc()
+        title_list = ['Nick name']
+        display.print_table(table, title_list)
+    elif option == "3":
+        os.system('clear')
+        table = query_functions.find_applicant_by_first_name()
+        title_list = ['Full name', 'Phone number']
+        display.print_table(table, title_list)
+    elif option == "4":
+        os.system('clear')
+        table = query_functions.find_applicant_by_email()
+        title_list = ['Full name', 'Phone number']
+        display.print_table(table, title_list)
+    elif option == "5":
+        os.system('clear')
+        query_functions.add_new_applicant()
+        table = query_functions.find_applicant_by_applicantion_code()
+        title_list = ['ID', 'First name', 'Last name', 'Phone number', 'Email', 'Application code']
+        display.print_table(table, title_list)
+    elif option == "6":
+        os.system('clear')
+        query_functions.update_applicant_phone_number()
+        table = query_functions.find_applicant_by_full_name_and_check_phone()
+        title_list = ['ID', 'First name', 'Last name', 'Phone number', 'Email', 'Application code']
+        display.print_table(table, title_list)
+    elif option == "7":
+        os.system('clear')
+        table = query_functions.delete_applicant_by_email()
+        print('There is no such entry anymore!')
+    elif option == "0":
+        sys.exit(0)
+    else:
+        raise KeyError("There is no such option.")
 
 
-@access_db
-def mentor_nick_names_miskolc():
-    query_command = "SELECT nick_name FROM mentors WHERE city='Miskolc';"
-    return query_command
+def handle_menu():
+    options = ["Full names of Codecool mentors",
+               "Nick names of mentors from Miskolc",
+               "Find Carol",
+               "Find an applicant by email",
+               "Add new applicant",
+               "Update applicant phone number",
+               "Delete applicants with domain name"]
+
+    display.print_menu("Main menu", options, "Exit program")
 
 
-@access_db
-def find_applicant_by_first_name():
-    query_command = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number FROM applicants WHERE first_name='Carol';"
-    return query_command
-
-
-@access_db
-def find_applicant_by_first_name_by_email():
-    query_command = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number FROM applicants WHERE email LIKE'%@adipiscingenimmi.edu';"
-    return query_command
-
-
-@access_db
-def add_new_applicant():
-    query_command = "INSERT INTO applicants (first_name, last_name, phone_number, email, application_code) VALUES ('Markus', 'Schaffarzyk', '0036020/725-2666', 'sjnovus@groovecoverage.com', '54823');"
-    return query_command
-
-
-@access_db
-def find_applicant_by_applicantion_code():
-    query_command = "SELECT * FROM applicants WHERE application_code='54823';"
-    return query_command
-
-
-@access_db
-def update_applicant_phone_number():
-    query_command = "UPDATE applicants SET phone_number='003670/223-7459' WHERE first_name='Jemima' AND last_name='Foreman';"
-    return query_command
-
-
-@access_db
-def find_applicant_by_full_name_and_check_phone():
-    query_command = "SELECT * FROM applicants WHERE first_name='Jemima' AND last_name='Foreman' AND phone_number IS NOT NULL;"
-    return query_command
-
-
-@access_db
-def delete_applicant_by_email():
-    query_command = "DELETE FROM applicants WHERE email LIKE '%mauriseu.net';"
-    return query_command
-
+def main():
+    while True:
+        handle_menu()
+        try:
+            choose()
+        except KeyError as err:
+            display.print_error_message(err)
 
 if __name__ == '__main__':
-    table = mentor_full_names()
-    title_list = ['first_name', 'last_name']
-    display.print_table(table, title_list)
+    main()
