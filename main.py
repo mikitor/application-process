@@ -1,4 +1,5 @@
 import psycopg2
+import display
 from data_manager import access_db
 
 
@@ -57,4 +58,6 @@ def delete_applicant_by_email():
 
 
 if __name__ == '__main__':
-    print(nick_names_miskolc())
+    table = mentor_full_names()
+    title_list = ['first_name', 'last_name']
+    display.print_table(table, title_list)
