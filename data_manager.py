@@ -17,8 +17,8 @@ def access_db(some_function):
             cursor.execute(query_command)
 
             table = cursor.fetchall()
-            print(table)
+            return table
         except Exception as e:
             print("Uh oh, can't connect. Invalid dbname, user or password?")
-            print(e)
+            return e
     return wrapper
