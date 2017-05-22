@@ -4,6 +4,7 @@ import psycopg2
 def access_db(some_function):
     def wrapper():
         try:
+            # export the credentials into an external config file
             connect_str = "dbname='miki' user='miki' host='localhost' password='123456789gl'"
             conn = psycopg2.connect(connect_str)
             conn.autocommit = True
