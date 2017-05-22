@@ -15,19 +15,22 @@ def mentor_nick_names_miskolc():
 
 @access_db
 def find_applicant_by_first_name():
-    query_command = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number FROM applicants WHERE first_name='Carol';"
+    query_command = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number FROM applicants \
+                     WHERE first_name='Carol';"
     return query_command
 
 
 @access_db
 def find_applicant_by_email():
-    query_command = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number FROM applicants WHERE email LIKE'%@adipiscingenimmi.edu';"
+    query_command = "SELECT CONCAT(first_name, ' ', last_name) AS full_name, phone_number FROM applicants \
+                     WHERE email LIKE'%@adipiscingenimmi.edu';"
     return query_command
 
 
 @access_db
 def add_new_applicant():
-    query_command = "INSERT INTO applicants (first_name, last_name, phone_number, email, application_code) VALUES ('Markus', 'Schaffarzyk', '0036020/725-2666', 'sjnovus@groovecoverage.com', '54823');"
+    query_command = "INSERT INTO applicants (first_name, last_name, phone_number, email, application_code) \
+                     VALUES ('Markus', 'Schaffarzyk', '0036020/725-2666', 'sjnovus@groovecoverage.com', '54823');"
     return query_command
 
 
@@ -39,13 +42,15 @@ def find_applicant_by_applicantion_code():
 
 @access_db
 def update_applicant_phone_number():
-    query_command = "UPDATE applicants SET phone_number='003670/223-7459' WHERE first_name='Jemima' AND last_name='Foreman';"
+    query_command = "UPDATE applicants SET phone_number='003670/223-7459' \
+                     WHERE first_name='Jemima' AND last_name='Foreman';"
     return query_command
 
 
 @access_db
 def find_applicant_by_full_name_and_check_phone():
-    query_command = "SELECT * FROM applicants WHERE first_name='Jemima' AND last_name='Foreman' AND phone_number IS NOT NULL;"
+    query_command = "SELECT * FROM applicants \
+                     WHERE first_name='Jemima' AND last_name='Foreman' AND phone_number IS NOT NULL;"
     return query_command
 
 
