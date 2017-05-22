@@ -1,8 +1,9 @@
-import display
 import os
 import psycopg2
-import query_functions
 import sys
+
+import display
+import query_functions
 from data_manager import access_db
 
 
@@ -70,6 +71,7 @@ def main():
             choose()
         except KeyError as err:
             display.print_error_message(err)
+
 
 if __name__ == '__main__':
     main()
