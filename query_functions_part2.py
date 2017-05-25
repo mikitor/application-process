@@ -35,3 +35,13 @@ def contacts():
                      FROM mentors JOIN schools ON schools.contact_person = mentors.id \
                      ORDER BY schools.name;"
     return query_command
+
+
+@access_db
+def applicants():
+    query_command = "SELECT applicants.first_name, applicants.application_code, applicants_mentors.creation_date \
+                     FROM applicants FULL OUTER JOIN applicants_mentors \
+                     ON (applicants.id = applicants_mentors.applicant_id) \
+                     WHERE  applicants_mentors.creation_date > '2016-01-01' \
+                     ORDER BY applicants_mentors.creation_date DESC;"
+    return query_command
