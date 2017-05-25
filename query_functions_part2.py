@@ -27,3 +27,11 @@ def mentors_by_country():
                      GROUP BY schools.country \
                      ORDER BY schools.country;"
     return query_command
+
+
+@access_db
+def contacts():
+    query_command = "SELECT schools.name, mentors.first_name, mentors.last_name \
+                     FROM mentors JOIN schools ON schools.contact_person = mentors.id \
+                     ORDER BY schools.name;"
+    return query_command
