@@ -17,3 +17,13 @@ def all_school():
                      USING (city) \
                      ORDER BY mentors.id;"
     return query_command
+
+
+@access_db
+def mentors_by_country():
+    query_command = "SELECT schools.country AS country, COUNT(mentors.id) AS count \
+                     FROM mentors RIGHT OUTER JOIN schools \
+                     USING (city) \
+                     GROUP BY schools.country \
+                     ORDER BY schools.country;"
+    return query_command
