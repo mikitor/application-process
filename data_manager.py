@@ -1,12 +1,15 @@
 import psycopg2
+import configuration
 
 
 def access_db(some_function):
     def wrapper():
         try:
-            # export the credentials into an external config file
-            connect_str = "dbname='miki' user='miki' host='localhost' password='123456789gl'"
-            conn = psycopg2.connect(connect_str)
+            # CONNECTION_DATA holds the credential information in a dictionary format
+            connection_data = configuration.CONNECTION_DATA
+            connect_string = "dbname='{dbname}' user='{user}' host='{host}' password='{password}'"
+            connect_string = connect_string.format(**connection_data)
+            conn = psycopg2.connect(connect_string)
             conn.autocommit = True
             cursor = conn.cursor()
 
