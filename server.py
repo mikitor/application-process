@@ -14,8 +14,8 @@ def index():
 @app.route('/mentors')
 def mentors():
     table = query_functions_part2.mentors()
-    table_header = ['']
-    return render_template('table.html', table=table)
+    table_header = ['Mentor name', 'School', 'Country']
+    return render_template('table.html', table=table, table_header=table_header)
 
 
 @app.route('/all-school')
