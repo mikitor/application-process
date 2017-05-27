@@ -49,7 +49,8 @@ def applicants():
 @app.route('/applicants-and-mentors')
 def applicants_and_mentors():
     table = query_functions_part2.applicants_and_mentors()
-    return render_template('table.html', table=table)
+    table_header = ['Applicant first name', 'Application code', 'Mentor first name', 'Mentor last name']
+    return render_template('table.html', table=table, table_header=table_header)
 
 
 if __name__ == '__main__':
