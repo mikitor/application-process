@@ -42,7 +42,8 @@ def contacts():
 @app.route('/applicants')
 def applicants():
     table = query_functions_part2.applicants()
-    return render_template('table.html', table=table)
+    table_header = ['Applicant first name', 'Application code', 'Application date']
+    return render_template('table.html', table=table, table_header=table_header)
 
 
 @app.route('/applicants-and-mentors')
