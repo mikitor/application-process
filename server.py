@@ -21,7 +21,8 @@ def mentors():
 @app.route('/all-school')
 def all_school():
     table = query_functions_part2.all_school()
-    return render_template('table.html', table=table)
+    table_header = ['Mentor name', 'School', 'Country']
+    return render_template('table.html', table=table, table_header=table_header)
 
 
 @app.route('/mentors-by-country')

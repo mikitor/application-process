@@ -12,7 +12,7 @@ def mentors():
 
 @access_db
 def all_school():
-    query_command = "SELECT mentors.first_name, mentors.last_name, schools.name, schools.country \
+    query_command = "SELECT CONCAT(mentors.first_name, ' ', mentors.last_name) AS mentor_name, schools.name, schools.country \
                      FROM mentors RIGHT OUTER JOIN schools \
                      USING (city) \
                      ORDER BY mentors.id;"
