@@ -45,3 +45,15 @@ def applicants():
                      WHERE  applicants_mentors.creation_date > '2016-01-01' \
                      ORDER BY applicants_mentors.creation_date DESC;"
     return query_command
+
+
+@access_db
+def applicants_and_mentors():
+    query_command = "SELECT applicants.first_name, applicants.application_code, \
+                     COALESCE(mentors.first_name, 'None') AS mentor_first_name, \
+                     COALESCE(mentors.last_name, 'None') AS mentor_last_name \
+                     FROM applicants_mentors \
+                     RIGHT OUTER JOIN applicants ON applicants.id = applicants_mentors.applicant_id \
+                     LEFT OUTER JOIN mentors ON applicants_mentors.mentor_id = mentors.id \
+                     ORDER BY applicants.id;"
+    return query_command
