@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>{{ table_title }}</h1>
+    <table class="table table-bordered table-hover">
+        <thead>
+            
+            {% for element in table_header}
+                <th>{{ element }}</th>
+            {% endfor %}
+        
+        </thead>
+        <tbody>
+            
+            {% for row in table %}
+                <tr>
+                    {% for cell in row %}
+                        <td> {{ cell }} </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+{% endblock %}
