@@ -31,7 +31,7 @@ def mentors_by_country():
 
 @access_db
 def contacts():
-    query_command = "SELECT schools.name, mentors.first_name, mentors.last_name \
+    query_command = "SELECT schools.name, CONCAT(mentors.first_name, ' ', mentors.last_name) AS mentor_name \
                      FROM mentors JOIN schools ON schools.contact_person = mentors.id \
                      ORDER BY schools.name;"
     return query_command

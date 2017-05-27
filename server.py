@@ -35,7 +35,8 @@ def mentors_by_country():
 @app.route('/contacts')
 def contacts():
     table = query_functions_part2.contacts()
-    return render_template('table.html', table=table)
+    table_header = ['School', 'Mentor name']
+    return render_template('table.html', table=table, table_header=table_header)
 
 
 @app.route('/applicants')
